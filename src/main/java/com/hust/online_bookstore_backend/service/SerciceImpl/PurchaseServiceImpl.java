@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hust.online_bookstore_backend.entity.Book;
 import com.hust.online_bookstore_backend.entity.Purchase;
 import com.hust.online_bookstore_backend.entity.Stock;
+import com.hust.online_bookstore_backend.entity.vo.PurchaseVO;
 import com.hust.online_bookstore_backend.mapper.BookMapper;
 import com.hust.online_bookstore_backend.mapper.PurchaseMapper;
 import com.hust.online_bookstore_backend.mapper.StockMapper;
@@ -42,8 +43,8 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseMapper, Purchase> i
     }
 
     @Override
-    public List<Purchase> getPurchaseList() {
-        return purchaseMapper.selectList(null);
+    public List<PurchaseVO> getPurchaseList() {
+        return purchaseMapper.getList();
     }
 
     @Override
@@ -51,7 +52,7 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseMapper, Purchase> i
         Purchase purchase = purchaseMapper.selectById(purchaseId);
         LambdaUpdateWrapper<Purchase> Wrapper_purchase = new LambdaUpdateWrapper<>();
         Wrapper_purchase.eq(Purchase::getPurchaseId, purchase.getPurchaseId());
-        Wrapper_purchase.set(Purchase::getIsFished, 1);
+        Wrapper_purchase.set(Purchase::getIsFinished, 1);
         purchaseMapper.update(Wrapper_purchase);
         LambdaQueryWrapper<Stock> queryWrapper_stock = new LambdaQueryWrapper<>();
         queryWrapper_stock.eq(Stock::getStockId, purchase.getStockId());

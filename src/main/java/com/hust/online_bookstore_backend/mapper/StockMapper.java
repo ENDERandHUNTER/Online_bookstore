@@ -2,10 +2,13 @@ package com.hust.online_bookstore_backend.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hust.online_bookstore_backend.entity.Stock;
+import com.hust.online_bookstore_backend.entity.StockVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 
 @Mapper
@@ -26,4 +29,11 @@ public interface StockMapper extends BaseMapper<Stock> {
      */
     @Insert("INSERT INTO stock (bookId, supplierId, num, date_) VALUES (#{bookId}, #{supplierId}, #{num}, #{date_})")
     void insertStock(Stock stock);
+
+     @Select("""
+            SELECT *
+            FROM stock sk, book b, supplier sr
+            where sk.bookId = b.bookId and sk.supplierId = sr.supplierId
+            """)
+    List<StockVO> selectALLList(Object o);
 }

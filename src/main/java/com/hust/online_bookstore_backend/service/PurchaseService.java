@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hust.online_bookstore_backend.entity.Purchase;
 import com.hust.online_bookstore_backend.entity.Stock;
+import com.hust.online_bookstore_backend.entity.vo.PurchaseVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 public interface PurchaseService extends IService<Purchase> {
     void producePurchase(List<Stock> stockList);
-    List<Purchase>getPurchaseList();
+    List<PurchaseVO>getPurchaseList();
 
     void deleteStock(Integer purchaseId);
 }

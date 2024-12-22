@@ -46,6 +46,17 @@ public class BookController {
         }
     }
 
+    @PostMapping("/customer/buyBook/{bookId}")
+    public JsonResult buyBook(@PathVariable int bookId) {
+        int res = bookMapper.dsecInventoryById(bookId);
+        if (res > 0) {
+            return new JsonResult(true,"成功购买");
+        }
+        else {
+            return new JsonResult(false,"库存不足");
+        }
+    }
+
     @PostMapping("/business/appendBook")
     public JsonResult appendBook(@RequestBody Book book) {
         int res = bookMapper.insert(book);
@@ -68,14 +79,4 @@ public class BookController {
         }
     }
 
-    @PostMapping("/customer/buyBook/{bookId}")
-    public JsonResult buyBook(@PathVariable int bookId) {
-        int res = bookMapper.dsecInventoryById(bookId);
-        if (res > 0) {
-            return new JsonResult(true,"成功购买");
-        }
-        else {
-            return new JsonResult(false,"库存不足");
-        }
-    }
 }

@@ -16,4 +16,6 @@ public class Order {
     private Byte state;
 
     private String orderAddress;
+
+    private Float totalPrice;
 }

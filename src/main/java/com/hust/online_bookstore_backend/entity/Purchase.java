@@ -12,7 +12,7 @@ public class Purchase {
 
     private Integer stockId;
 
-    private Boolean isFished;
+    private Boolean isFinished;
 
     private Integer quantity;
 }
